@@ -1,6 +1,6 @@
   x=2;
     if((x==1) || (x==2))
-        filename="output.wav";
+        filename="sample.wav";
         [aud,fs]=audioread(filename);
         filterBlock=ones(1,50)/50;
         aud=filter(filterBlock,1,aud);
@@ -16,8 +16,8 @@
                 temp=[temp; wordSignals{i}];
             end
         end
-        [digitResult,digitAcc]=classifyWord(temp,fs);
-        [learnResult,learnAcc]=classifyWord(learn,fs);
+        [digitResult,digitAcc]=classifyGaussianWord(temp,fs);
+        [learnResult,learnAcc]=classifyGaussianWord(learn,fs);
         if(learnResult=='0')
             learnResult='learn ';
         end
@@ -30,21 +30,22 @@
         %end
         if(command=="learn 1")
             %do command 1
-            output=command;
+            output="The Roman People claim their heritage from the Trojans, as described in the Iliad by Virgil";
             fprintf("doing %s\n",command);
         elseif(command=="learn 2")
             %do command 2
-            output=command;
+            output="The mitochondria is the powerhouse of the cell";
             fprintf("doing %s\n",command);
         elseif(command=="learn 3")
             %do command 3
-            output=command;
+            output="The blue whale is the largest animal to ever exist on the planet";
             fprintf("doing %s\n",command);
         else
             fprintf("%s is not a valid command\n",command);
-            output="error\n";
+            output="error";
         end
     else
         fprintf("Entered %d, only 1 or 2 is allowed\n",x);
-        output="error\n";
+        output="error";
     end
+    
