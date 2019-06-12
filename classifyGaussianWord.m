@@ -1,10 +1,10 @@
 
 function [results,acc] = classifyGaussianWord(x,fs)
     if isfile('training_dataG.mat') && isfile('training_data2G.mat')
-          mfccModel = load('training_dataG.mat');
-           specFluxModel = load('training_data2G.mat');
-           [mfccRes,mfccAcc] =mfccPredict(mfccModel,x,fs);
-           [fluxRes,fluxAcc] =fluxPredict(specFluxModel,x,fs);
+          mfccModelG = load('training_dataG.mat');
+           specFluxModelG = load('training_data2G.mat');
+           [mfccRes,mfccAcc] =mfccPredict(mfccModelG.mfccModelG,x,fs);
+           [fluxRes,fluxAcc] =fluxPredict(specFluxModelG.specFluxModelG,x,fs);
            %mfccAcc=max(mfccAcc)/sum(mfccAcc);
            %fluxAcc=max(fluxAcc)/sum(fluxAcc);
            if(mfccAcc>=fluxAcc)
@@ -18,10 +18,10 @@ function [results,acc] = classifyGaussianWord(x,fs)
            end
     else
         %do the training
-         mfccModel = train();
-         specFluxModel = train2();
-         [mfccRes,mfccAcc] =mfccPredict(mfccModel,x,fs);
-           [fluxRes,fluxAcc] =fluxPredict(specFluxModel,x,fs);
+         mfccModelG = train();
+         specFluxModelG = train2();
+         [mfccRes,mfccAcc] =mfccPredict(mfccModelG,x,fs);
+           [fluxRes,fluxAcc] =fluxPredict(specFluxModelG,x,fs);
            %mfccAcc=max(mfccAcc)/sum(mfccAcc);
            %fluxAcc=max(fluxAcc)/sum(fluxAcc);
            if(mfccAcc>=fluxAcc)
